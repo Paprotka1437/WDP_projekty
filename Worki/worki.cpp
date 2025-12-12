@@ -137,8 +137,8 @@ void na_odwrot(worek *w){
 void gotowe(){
         do{
                 ogon = glowa->next;
-                if(glowa->type == 'w') delete glowa->w;
-                else delete glowa->p;
+                if(glowa->type == 'w') delete glowa->w; //usuwanie worka
+                else delete glowa->p; //usuwanie przedmiotu
                 delete glowa;
                 glowa = ogon;
         } while(ogon);
