@@ -5,18 +5,17 @@ using namespace std;
 
 struct worek;
 struct przedmiot;
-struct lista;
 
 struct przedmiot {
        worek *father;
 };
 
+//przedmioty nie są bezpośredino podpięte do worka tylko do atrapy na którą dany worek ma wskąźnik
 struct worek {
         int size;
         int numer;
         worek *father;
         worek *atrapa;
-        //przedmiot *prv, *nxt, *hed, *tal;
 };
 
 
