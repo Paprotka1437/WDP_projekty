@@ -6,18 +6,12 @@ using namespace std;
 
 /* function compares the quality of two intervals, by squaring it, and returns true if the quality of A
 is strictly greater than the quality of B */
-bool comp_qual (pair <int, int> A, pair <int, int> B, vector <pair <int, int>> &points){
-        long long C = points[A.second].first - points[A.first].first,
-                  D = points[B.second].first - points[B.first].first,
-                  E = A.second - A.first + 1, F = B.second - B.first + 1;
-        C *= C; D *= D;
-        //first we compare the floors
-        if (C / E > D / F) return true;
-        //if floors of two qualities are equal, then we compare fractional parts
-        long long rem_a = C % E, rem_b = D % F;
-        if (C / E == D / F && rem_a * F > rem_b * E) return true;
-        return false;
-}
+ bool comp_quality (pair <int, int> A, pair <int, int> B, vector <pair <int, int>> &points){
+                  __int128_t C = points[A.second].first - points[A.first].first,
+                             D = points[B.second].first - points[B.first].first,
+                             E = A.second - A.first + 1, F = B.second - B.first + 1;
+                  return C*C*F > D*D*E;
+ }
 
 //function decides wchich interval contains point i have the greatest quality
 void answer (int n, vector <pair <int, int>> &points, vector <pair <int, int>> &intervals){
@@ -28,7 +22,7 @@ void answer (int n, vector <pair <int, int>> &points, vector <pair <int, int>> &
                         /*loop removes from back of deque every interval that have quality worse than
                         new interval, because every of this interval ends up earlier than new one so it 
                         cant be answer for any point i */
-                        while (!maksi.empty() && comp_qual (intervals[end], intervals[maksi.back()], points)){
+                        while (!maksi.empty() && comp_quality (intervals[end], intervals[maksi.back()], points)){
                                 maksi.pop_back();
                         }
                         maksi.push_back (end);
